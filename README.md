@@ -34,6 +34,8 @@ Run the following command to install a package in a specific workspace.
 npm install <package> --workspace=<workspace>
 ```
 
+Eg. `npm install folder-encrypt --workspace=packages/core`
+
 ## References
 
 - <https://docs.npmjs.com/cli/v8/using-npm/workspaces>

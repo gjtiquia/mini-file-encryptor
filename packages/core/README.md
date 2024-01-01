@@ -17,3 +17,12 @@ Run the following command to run all the tests for this package.
 ```bash
 npm run test
 ```
+
+## Notes
+
+Used the npm package `folder-encrypt` for encryption. Upon inspection of the source code, it uses the built-in Node package `crypto` and AES256 for encryption.
+
+## References
+
+<https://github.com/scrwdrv/folder-encrypt>
+<https://nodejs.org/api/crypto.html>

@@ -4,7 +4,8 @@
     "module": "./dist/index.mjs",
     "scripts": {
         "test": "jest  --verbose",
-        "build": "tsup src/index.ts --format esm,cjs --dts --clean"
+        "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+        "start": "npm run build && node dist/index.js"
     },
     "devDependencies": {
         "@types/jest": "^29.5.6",
@@ -12,5 +13,8 @@
         "ts-jest": "^29.1.1",
         "tsup": "^7.2.0",
         "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "folder-encrypt": "^1.1.7"
     }
 }
