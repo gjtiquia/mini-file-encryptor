@@ -1,8 +1,6 @@
-# Click Me - A Cross-Platform App Demo
+# Mini File Encryptor
 
-A simple demo for writing software using Clean Architecture, an architecture guideline written by Robert C. Martin in his book Clean Architecture.
-
-It is a simple counter app, with increment and decrement buttons for increasing and decreasing the count.
+Mini File Encryptor, a minimalistic offline file encryptor.
 
 All the business rules are encapsulated in `/packages/core`, while the various cross-platform application interfaces are in `/apps`.
 
@@ -27,4 +25,3 @@ Run the following command to run all the tests in the monorepo.
 ```bash
 npm run test
 ```
-
