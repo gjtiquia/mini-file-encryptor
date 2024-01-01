@@ -1,0 +1,18 @@
+{
+  "name": "click-me-cross-platform-demo",
+  "version": "0.0.1",
+  "description": "Click Me - A Cross-Platform App Demo",
+  "author": "GJTiquia",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "turbo run test",
+    "build": "turbo run build"
+  },
+  "dependencies": {
+    "turbo": "^1.10.16"
+  }
+}
