@@ -18,6 +18,8 @@ export const App = () => {
     }
 
     async function onEncryptClicked() {
+        // TODO : isLoading
+
         if (filePath === "" || filePath === undefined)
             return;
 
