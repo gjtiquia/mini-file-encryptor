@@ -4,4 +4,4 @@
 
 // Add this to the end of the existing file
 // https://www.electronforge.io/guides/framework-integration/react-with-typescript
-import './app';
+import './react';
