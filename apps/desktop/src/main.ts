@@ -1,5 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
+import { encryptAsync, decryptAsync } from "core";
+import { IPCRendererEvent } from './@types/events';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -30,6 +32,9 @@ const createWindow = () => {
 // This method will be called when Electron has finished initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+    ipcMain.handle(IPCRendererEvent.StartEncryption, (e, password: string, inputPath: string) => encryptAsync(password, inputPath, getEncryptOutputPathFromInputPath(inputPath)))
+    ipcMain.handle(IPCRendererEvent.StartDecryption, (e, password: string, inputPath: string) => decryptAsync(password, inputPath, getDecryptOutputPathFromInputPath(inputPath)))
+
     createWindow();
 
     app.on('activate', () => {
@@ -48,6 +53,14 @@ app.on('window-all-closed', () => {
         app.quit();
     }
 });
+
+function getEncryptOutputPathFromInputPath(inputPath: string) {
+    return `${inputPath}.encrypted`
+}
+
+function getDecryptOutputPathFromInputPath(inputPath: string) {
+    return inputPath.replace(".encrypted", "");
+}
 
 
 
