@@ -5,10 +5,20 @@
   "author": "GJTiquia",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "nohoist": [
+      "**/electron",
+      "**/electron/**",
+      "**/electron-squirrel-startup",
+      "**/electron-squirrel-startup/**",
+      "**/core",
+      "**/core/**"
+    ]
+  },
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build"

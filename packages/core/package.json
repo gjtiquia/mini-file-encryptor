@@ -1,7 +1,8 @@
 {
-    "name": "core",
+    "name": "mini-file-encryptor-core",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
+    "version": "0.1.0",
     "scripts": {
         "test": "jest  --verbose",
         "build": "tsup src/index.ts --format esm,cjs --dts --clean",
