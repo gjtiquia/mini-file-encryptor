@@ -11,19 +11,19 @@ This monorepo is managed using [Turborepo](https://turbo.build/repo).
 Run the following command in the root directory to install all the packages required by the monorepo.
 
 ```bash
-npm install
+yarn install
 ```
 
 Run the following command to build all the packages in the monorepo.
 
 ```bash
-npm run build
+yarn build
 ```
 
 Run the following command to run all the tests in the monorepo.
 
 ```bash
-npm run test
+yarn test
 ```
 
 ## Other Commands
@@ -31,12 +31,9 @@ npm run test
 Run the following command to install a package in a specific workspace.
 
 ```bash
-npm install <package> --workspace=<workspace>
+yarn workspace <workspace> add <package>
 ```
-
-Eg. `npm install folder-encrypt --workspace=packages/core`
 
 ## References
 
-- <https://docs.npmjs.com/cli/v8/using-npm/workspaces>
 - <https://turbo.build/repo/docs/handbook>

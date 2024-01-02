@@ -17,6 +17,9 @@
     "email": "gershom.tiquia@gmail.com"
   },
   "license": "MIT",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
