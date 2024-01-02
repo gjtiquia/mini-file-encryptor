@@ -1,8 +1,8 @@
 {
   "name": "desktop",
-  "productName": "desktop",
+  "productName": "MiniFileEncryptor",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Mini File Encryptor. A minimalistic offline file encryptor.",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
