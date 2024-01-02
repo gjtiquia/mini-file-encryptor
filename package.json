@@ -1,7 +1,7 @@
 {
-  "name": "click-me-cross-platform-demo",
+  "name": "mini-file-encryptor",
   "version": "0.0.1",
-  "description": "Click Me - A Cross-Platform App Demo",
+  "description": "Mini File Encryptor - a minimalistic offline file encryptor.",
   "author": "GJTiquia",
   "license": "MIT",
   "workspaces": [
