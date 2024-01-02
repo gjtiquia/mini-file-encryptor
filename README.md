@@ -2,7 +2,7 @@
 
 Mini File Encryptor, a minimalistic offline file encryptor.
 
-All the business rules are encapsulated in `/packages/core`, while the various cross-platform application interfaces are in `/apps`.
+All the business rules are encapsulated in `/packages/core`, while the frontend in `/apps`.
 
 This monorepo is managed using [Turborepo](https://turbo.build/repo).
 
