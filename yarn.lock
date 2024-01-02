@@ -2603,7 +2603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core@workspace:*, core@workspace:packages/core":
+"core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "core@workspace:packages/core"
   dependencies:
@@ -2806,7 +2806,6 @@ __metadata:
     "@types/react": "npm:^18.2.46"
     "@types/react-dom": "npm:^18.2.18"
     autoprefixer: "npm:^10.4.16"
-    core: "workspace:*"
     electron: "npm:28.1.0"
     electron-squirrel-startup: "npm:^1.0.0"
     postcss: "npm:^8.4.32"
