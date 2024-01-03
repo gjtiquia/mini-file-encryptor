@@ -41,14 +41,13 @@ describe("Encryption Tests", () => {
         const filesAfterDecrypt = fs.readdirSync(decryptResultPath, { withFileTypes: true });
 
         expect(filesAfterDecrypt.length).toEqual(filesBeforeEncrypt.length);
-        expect(filesAfterDecrypt).toEqual(filesBeforeEncrypt);
 
         for (let i = 0; i < filesBeforeEncrypt.length; i++) {
             const fileBeforeEncrypt = filesBeforeEncrypt[i];
             const fileAfterDecrypt = filesAfterDecrypt[i];
 
-            expect(fileBeforeEncrypt).toEqual(fileAfterDecrypt);
-            // console.log(fileBeforeEncrypt);
+            // Don't compare path as one is in a temp folder and one is not
+            expect(fileBeforeEncrypt.name).toEqual(fileAfterDecrypt.name);
         }
 
         // This raises an error where it cannot completely delete the temp directory...

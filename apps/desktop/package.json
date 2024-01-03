@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "clean": "rm -rf node_modules"
   },
   "keywords": [],
   "author": {
@@ -17,9 +18,6 @@
     "email": "gershom.tiquia@gmail.com"
   },
   "license": "MIT",
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
   "dependencies": {
     "core": "workspace:*",
     "electron-squirrel-startup": "^1.0.0",
