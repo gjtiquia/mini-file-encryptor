@@ -1,7 +1,7 @@
-import { CORE } from "src/preload";
+import { ELECTRON_API } from "src/preload";
 
 declare global {
     interface Window {
-        core: typeof CORE
+        electronAPI: typeof ELECTRON_API
     }
 }

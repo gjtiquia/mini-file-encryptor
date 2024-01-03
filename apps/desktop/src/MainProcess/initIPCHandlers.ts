@@ -1,10 +1,18 @@
-import { ipcMain, IpcMainInvokeEvent } from 'electron';
+import { dialog, ipcMain, IpcMainInvokeEvent } from 'electron';
 import { encryptAsync, decryptAsync } from "core";
 import { IPCRendererEvent } from '../@types/events';
 
 export function initIPCHandlers() {
+    ipcMain.handle(IPCRendererEvent.DialogOpenDirectory, onDialogOpenDirectoryAsync)
     ipcMain.handle(IPCRendererEvent.EncryptAsync, onEncryptAsync)
     ipcMain.handle(IPCRendererEvent.DecryptAsync, onDecryptAsync)
+}
+
+async function onDialogOpenDirectoryAsync(e: IpcMainInvokeEvent) {
+    const { canceled, filePaths } = await dialog.showOpenDialog({ properties: ["openDirectory"] })
+    if (!canceled) {
+        return filePaths[0]
+    }
 }
 
 function onEncryptAsync(e: IpcMainInvokeEvent, password: string, inputPath: string) {
