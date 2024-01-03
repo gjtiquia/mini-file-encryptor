@@ -4,18 +4,18 @@ The core business rules for Mini File Encryptor.
 
 ## Commands
 
-After running `yarn install` in the root directory, the following commands can be run from this directory.
+After running `npm install` in the root directory, the following commands can be run from this directory.
 
 Run the following command to compile the JavaScript package from TypeScript.
 
 ```bash
-yarn build
+npm run build
 ```
 
 Run the following command to run all the tests for this package.
 
 ```bash
-yarn test
+npm run test
 ```
 
 ## Notes

@@ -4,9 +4,25 @@ import { MakerZIP } from '@electron-forge/maker-zip';
 import { MakerDeb } from '@electron-forge/maker-deb';
 import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
+import { bundle } from './bundler';
 
 const config: ForgeConfig = {
-  packagerConfig: {},
+  packagerConfig: {
+    prune: false, // required for the workaround below to work
+  },
+  hooks: {
+    packageAfterCopy: async (
+      forgeConfig: any,
+      buildPath: string,
+      electronVersion: string,
+      platform: string,
+      arch: string,
+    ) => {
+      // this is a workaround until we find a proper solution
+      // for running electron-forge in a mono repository
+      await bundle(__dirname, buildPath);
+    },
+  },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
   plugins: [

@@ -11,19 +11,19 @@ This monorepo is managed using [Turborepo](https://turbo.build/repo).
 Run the following command in the root directory to install all the packages required by the monorepo.
 
 ```bash
-yarn install
+npm install
 ```
 
 Run the following command to build all the packages in the monorepo.
 
 ```bash
-yarn build
+npm run build
 ```
 
 Run the following command to run all the tests in the monorepo.
 
 ```bash
-yarn test
+npm run test
 ```
 
 ## Other Commands
@@ -31,7 +31,7 @@ yarn test
 Run the following command to install a package in a specific workspace.
 
 ```bash
-yarn workspace <workspace> add <package>
+npm install <package> --workspace=<workspace>
 ```
 
 ## References

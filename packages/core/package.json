@@ -5,7 +5,7 @@
     "scripts": {
         "test": "jest  --verbose",
         "build": "tsup src/index.ts --format esm,cjs --dts --clean",
-        "start": "yarn build && node dist/index.js",
+        "start": "npm run build && node dist/index.js",
         "clean": "rm -rf node_modules"
     },
     "devDependencies": {

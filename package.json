@@ -12,10 +12,9 @@
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",
-    "clean": "turbo run clean && rm -rf node_modules && rm -rf yarn.lock"
+    "clean": "turbo run clean && rm -rf node_modules && rm -rf package.lock"
   },
   "dependencies": {
     "turbo": "^1.10.16"
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }
