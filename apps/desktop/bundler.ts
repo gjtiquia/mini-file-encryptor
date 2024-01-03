@@ -10,8 +10,6 @@ const path = require('path');
 const { findRoot } = require('@manypkg/find-root');
 const arborist = require('@npmcli/arborist');
 
-const DEBUG = false;
-
 interface Edge {
     workspace: boolean,
     type: 'prod' | 'dev' | 'peer' | 'optional',
@@ -29,22 +27,10 @@ interface Node {
 }
 
 const resolveLink = (node: Node): Node => {
-
-    if (DEBUG) {
-        console.error("resolving Link...");
-        console.error(node);
-    }
-
     return node.isLink ? resolveLink(node.target) : node;
 }
 
 const getWorkspaceByPath = (node: Node, realPath: string): Node | undefined => {
-
-    if (DEBUG) {
-        console.error("Getting workspace by path...");
-        console.error(node.edgesOut);
-    }
-
     return [...node.edgesOut.values()]
         .filter((depEdge) => {
             console.log(`filtering... ${depEdge.workspace === true}`);
@@ -62,11 +48,12 @@ const getWorkspaceByPath = (node: Node, realPath: string): Node | undefined => {
         .find((depNode) => depNode.realpath === realPath);
 }
 
-const collectProdDeps = (node: Node): Node[] =>
-    [...node.edgesOut.values()]
+const collectProdDeps = (node: Node): Node[] => {
+    return [...node.edgesOut.values()]
         .filter((depEdge) => depEdge.type === 'prod')
         .map((depEdge) => resolveLink(depEdge.to))
         .flatMap((depNode) => [depNode, ...collectProdDeps(depNode)]);
+}
 
 export const bundle = async (source: string, destination: string): Promise<void> => {
 
@@ -80,20 +67,6 @@ export const bundle = async (source: string, destination: string): Promise<void>
 
     const prodDeps = collectProdDeps(sourceNode);
 
-    // for (const dep of prodDeps) {
-    //     const dest = path.join(destination, dep.location);
-
-    //     await fs.cp(dep.realpath, dest, {
-    //         recursive: true,
-    //         errorOnExist: false,
-    //     });
-    // }
-
-    /*
-    Thank you @robin-hartmann !
-    I needed to add recursive: true to fs.cp.
-    Also, in order to copy modules from workspaces I wrote:
-    */
     for (const dep of prodDeps) {
         const dest = dep.isWorkspace
             ? path.join(destination, `node_modules / ${dep.packageName} `)
