@@ -10,9 +10,6 @@
             "dependsOn": [
                 "build"
             ]
-        },
-        "clean": {
-            "cache": false
         }
     }
 }
