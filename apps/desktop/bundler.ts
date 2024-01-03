@@ -96,7 +96,7 @@ export const bundle = async (source: string, destination: string): Promise<void>
     */
     for (const dep of prodDeps) {
         const dest = dep.isWorkspace
-            ? path.join(destination, `node_modules / ${dep.packageName} `)
+            ? path.join(destination, "node_modules", dep.packageName)
             : path.join(destination, dep.location)
 
         await fs.cp(dep.realpath, dest, {
