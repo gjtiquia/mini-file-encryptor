@@ -1,14 +1,19 @@
 {
+  "private": true,
   "name": "mini-file-encryptor",
   "version": "0.0.1",
   "description": "Mini File Encryptor - a minimalistic offline file encryptor.",
   "author": "GJTiquia",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "nohoist": [
+      "**"
+    ]
+  },
   "scripts": {
     "test": "turbo run test",
     "build": "turbo run build",
@@ -16,6 +21,5 @@
   },
   "dependencies": {
     "turbo": "^1.10.16"
-  },
-  "packageManager": "yarn@4.0.2"
+  }
 }

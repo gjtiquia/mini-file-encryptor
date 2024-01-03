@@ -1,5 +1,5 @@
 import { ipcMain, IpcMainInvokeEvent } from 'electron';
-import { encryptAsync, decryptAsync } from "core";
+import { decryptAsync, encryptAsync } from 'mini-file-encryptor-core';
 import { IPCRendererEvent } from '../@types/events';
 
 export function initIPCHandlers() {

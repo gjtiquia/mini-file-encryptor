@@ -1,5 +1,6 @@
 {
-  "name": "desktop",
+  "private": true,
+  "name": "mini-file-encryptor-desktop",
   "productName": "MiniFileEncryptor",
   "version": "1.0.0",
   "description": "Mini File Encryptor. A minimalistic offline file encryptor.",
@@ -19,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "core": "workspace:*",
+    "mini-file-encryptor-core": "*",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
