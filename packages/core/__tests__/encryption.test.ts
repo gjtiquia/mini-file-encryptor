@@ -35,7 +35,7 @@ describe("Encryption Tests", () => {
 
         // This raises an error where it cannot completely delete the temp directory...
         // It does not raise error after encryption but only raises after decryption
-        // Not sure why but at least can delete before the test
+        // Not sure why but at least can delete before running all the test
         // For now added temp directory to .gitignore, and open new temp folders for each test
         // expectTempDirectoryToBeClean();
     })
