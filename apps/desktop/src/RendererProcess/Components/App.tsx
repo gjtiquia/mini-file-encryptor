@@ -11,11 +11,8 @@ export const App = () => {
     return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-5">
         <Header />
 
-        <ChooseFolderButton onFolderChanged={setDirectoryPath} />
-        <p className="text-slate-200">Path: {directoryPath}</p>
-
+        <ChooseFolderButton onPathChanged={setDirectoryPath} path={directoryPath} />
         <PasswordInput onChanged={setPassword} value={password} />
-
         <EncryptButton password={password} inputPath={directoryPath} />
     </div>;
 }
