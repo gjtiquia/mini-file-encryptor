@@ -1,5 +1,5 @@
 export enum IPCRendererEvent {
-    DialogOpenDirectory = "DialogOpenDirectory",
+    OpenDialogAsync = "OpenDialogAsync",
     EncryptAsync = "EncryptAsync",
     DecryptAsync = "DecryptAsync"
 }

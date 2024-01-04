@@ -8,7 +8,11 @@ interface IDecryptParams {
     inputPath: string
 }
 
-interface IOpenDirectoryResult {
+interface IOpenDialogParams {
+    properties?: Array<'openFile' | 'openDirectory' | 'multiSelections' | 'showHiddenFiles' | 'createDirectory' | 'promptToCreate' | 'noResolveAliases' | 'treatPackageAsDirectory' | 'dontAddToRecent'>
+}
+
+interface IOpenDialogResult {
     isSuccess: boolean,
     path: string,
     name: string

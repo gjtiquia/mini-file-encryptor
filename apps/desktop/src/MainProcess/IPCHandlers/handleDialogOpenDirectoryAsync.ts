@@ -1,8 +1,8 @@
 import { dialog, IpcMainInvokeEvent } from "electron";
 import path from "path"
 
-export async function handleDialogOpenDirectoryAsync(e: IpcMainInvokeEvent): Promise<IOpenDirectoryResult> {
-    const { canceled, filePaths } = await dialog.showOpenDialog({ properties: ["openDirectory"] })
+export async function handleOpenDialogAsync(e: IpcMainInvokeEvent, params: IOpenDialogParams): Promise<IOpenDialogResult> {
+    const { canceled, filePaths } = await dialog.showOpenDialog({ properties: params.properties })
     if (canceled)
         return { isSuccess: false, path: "", name: "" }
 

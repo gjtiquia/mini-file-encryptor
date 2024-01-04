@@ -5,7 +5,7 @@ import { contextBridge, ipcRenderer } from "electron";
 import { IPCRendererEvent } from "./@types/enums";
 
 export const ELECTRON_API = {
-    openDirectory: (): Promise<IOpenDirectoryResult> => ipcRenderer.invoke(IPCRendererEvent.DialogOpenDirectory),
+    openDialogAsync: (params: IOpenDialogParams): Promise<IOpenDialogResult> => ipcRenderer.invoke(IPCRendererEvent.OpenDialogAsync, params),
     encryptAsync: (params: IEncryptParams): Promise<void> => ipcRenderer.invoke(IPCRendererEvent.EncryptAsync, params),
     decryptAsync: (params: IDecryptParams): Promise<void> => ipcRenderer.invoke(IPCRendererEvent.DecryptAsync, params),
 }

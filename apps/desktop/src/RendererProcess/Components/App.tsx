@@ -1,67 +1,38 @@
 import { useState } from "react";
 import { Header } from "./Header";
-import { ChooseFolderButton } from "./ChooseFolderButton";
+import { ChoosePathButton } from "./ChoosePathButton";
 import { PasswordInput } from "./PasswordInput";
-import { EncryptButton } from "./EncryptButton";
+import { TabBar, Tab } from "./TabBar";
+import { DynamicButton } from "./DynamicButton";
 
-type TabState = "Encrypt" | "Decrypt";
 
 export const App = () => {
-    const [directoryPath, setDirectoryPath] = useState("");
+    const [path, setPath] = useState("");
     const [password, setPassword] = useState("");
-    const [tabState, setTabState] = useState<TabState>("Encrypt");
+    const [tab, setTab] = useState<Tab>("Encrypt");
 
     function toggleTab() {
-        switch (tabState) {
-            case "Encrypt": setTabState("Decrypt"); return;
-            case "Decrypt": setTabState("Encrypt"); return;
+        setPath("");
+        setPassword("");
+
+        switch (tab) {
+            case "Encrypt": setTab("Decrypt"); return;
+            case "Decrypt": setTab("Encrypt"); return;
         }
     }
 
     return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-12">
         <Header />
 
-        <div className="flex gap-16">
-            <button
-                className="
-                    text-slate-500 text-lg border-slate-300
-                    disabled:text-slate-300 disabled:font-bold disabled:border-b-2
-                "
-                disabled={tabState === "Encrypt"}
-                onClick={toggleTab}
-            >
-                Encrypt
-            </button>
-
-            <div className="border-2 border-slate-500" ></div>
-
-            <button
-                className="
-                    text-slate-500 text-lg border-slate-300
-                    disabled:text-slate-300 disabled:font-bold disabled:border-b-2
-                "
-                disabled={tabState === "Decrypt"}
-                onClick={toggleTab}
-            >
-                Decrypt
-            </button>
-        </div>
-
+        <TabBar tab={tab} onToggleTab={toggleTab} />
 
         <div className="flex flex-col items-center justify-center gap-5">
             {/* TODO: Dragzone! Ref: https://www.youtube.com/watch?v=W73SFdpQN5I&ab_channel=tylerlaceby */}
 
-            <ChooseFolderButton onPathChanged={setDirectoryPath} path={directoryPath} />
+            <ChoosePathButton tab={tab} onPathChanged={setPath} path={path} />
             <PasswordInput onChanged={setPassword} value={password} />
         </div>
 
-        {tabState !== "Encrypt" ? null :
-            <EncryptButton password={password} inputPath={directoryPath} />
-        }
-
-        {tabState !== "Decrypt" ? null :
-            <p> Decrypt Button </p>
-        }
-
+        <DynamicButton tab={tab} password={password} path={path} />
     </div>;
 }

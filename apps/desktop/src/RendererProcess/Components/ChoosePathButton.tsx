@@ -1,20 +1,24 @@
 import { useState } from "react";
+import { Tab } from "./TabBar";
 
-interface IChooseFolderButtonProps {
-    onPathChanged: (value: string) => void
-    path: string
+interface IChoosePathButtonProps {
+    onPathChanged: (value: string) => void,
+    path: string,
+    tab: Tab
 }
 
-export const ChooseFolderButton = (props: IChooseFolderButtonProps) => {
+export const ChoosePathButton = (props: IChoosePathButtonProps) => {
 
-    const [folderName, setFolderName] = useState("");
+    const [name, setName] = useState("");
     const [isShowingName, setIsShowingName] = useState(true);
 
-    async function onChooseFolderClickedAsync() {
-        const { path, name } = await window.electronAPI.openDirectory();
+    async function onChoosePathClickedAsync() {
+        const { path, name } = await window.electronAPI.openDialogAsync({
+            properties: [props.tab === "Encrypt" ? "openDirectory" : "openFile"]
+        });
 
         props.onPathChanged(path);
-        setFolderName(name);
+        setName(name);
     }
 
     function hasPath(): boolean {
@@ -28,14 +32,14 @@ export const ChooseFolderButton = (props: IChooseFolderButtonProps) => {
         if (!hasPath())
             return "No folder selected";
 
-        return isShowingName ? folderName : props.path;
+        return isShowingName ? name : props.path;
     }
 
     return <>
         <div className="flex flex-nowrap items-center gap-2 w-fit overflow-clip rounded-lg bg-slate-900">
             <button
                 className="px-4 py-1 rounded-lg min-w-fit text-slate-200 bg-slate-600 hover:bg-slate-500 active:bg-slate-700 "
-                onClick={onChooseFolderClickedAsync}
+                onClick={onChoosePathClickedAsync}
             >
                 Choose Folder
             </button>
