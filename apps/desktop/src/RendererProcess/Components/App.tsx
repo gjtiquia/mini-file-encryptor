@@ -12,6 +12,8 @@ export const App = () => {
         <Header />
 
         <div className="flex flex-col items-center justify-center gap-5">
+            {/* TODO: Dragzone! Ref: https://www.youtube.com/watch?v=W73SFdpQN5I&ab_channel=tylerlaceby */}
+
             <ChooseFolderButton onPathChanged={setDirectoryPath} path={directoryPath} />
             <PasswordInput onChanged={setPassword} value={password} />
         </div>

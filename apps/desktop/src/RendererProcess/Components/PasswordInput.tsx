@@ -15,7 +15,7 @@ export const PasswordInput = (props: IPasswordInputProps) => {
         </p>
         <input
             type="password"
-            className="block border rounded-lg cursor-pointer focus:outline-none text-slate-200 bg-slate-700 border-slate-600 placeholder-slate-400"
+            className="block border px-1 rounded-lg cursor-pointer focus:outline-none text-slate-200 bg-slate-700 border-slate-600 placeholder-slate-400"
             onChange={(e) => onPassworkInputChanged(e.target.value)}
             value={props.value}
         />
