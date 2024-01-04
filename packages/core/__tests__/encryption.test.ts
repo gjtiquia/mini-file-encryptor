@@ -2,41 +2,36 @@ import * as path from "path";
 import * as fs from "fs";
 import { encryptAsync, decryptAsync } from "../src";
 
-const directoryToEncryptName = "test-encrypt";
-const encryptionExtension = "encrypted";
-const encryptionPassword = "123";
+const _directoryToEncryptName = "test-encrypt";
+const _encryptionExtension = "encrypted";
+const _encryptionPassword = "123";
 
-const encryptedFileName = `${directoryToEncryptName}.${encryptionExtension}`;
+const _encryptedFileName = `${_directoryToEncryptName}.${_encryptionExtension}`;
 
-const currentDirectoryPath = __dirname;
-const tempParentDirectoryPath = path.join(currentDirectoryPath, "temp");
+const _currentDirectoryPath = __dirname;
+const _tempParentDirectoryPath = path.join(_currentDirectoryPath, "temp");
 
 describe("Encryption Tests", () => {
 
     beforeAll(() => {
         expectTempDirectoryToBeClean();
-        createEmptyDirectory(tempParentDirectoryPath);
+        createEmptyDirectory(_tempParentDirectoryPath);
     })
 
     it("should encrypt and decrypt successfully", async () => {
 
-        const tempDirectoryPath = path.join(tempParentDirectoryPath, "temp1");
+        const tempDirectoryPath = path.join(_tempParentDirectoryPath, "temp1");
+        const paths = new TestPaths(tempDirectoryPath);
         createEmptyDirectory(tempDirectoryPath);
 
-        const encryptInputPath = path.join(currentDirectoryPath, directoryToEncryptName);
-        const encryptOutputPath = path.join(tempDirectoryPath, encryptedFileName);
+        await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expectPathToExist(paths.encryptOutputPath);
 
-        const decryptInputPath = path.join(tempDirectoryPath, encryptedFileName);
-        const decryptOutputPath = path.join(tempDirectoryPath, directoryToEncryptName);
-
-        await encryptAsync(encryptionPassword, encryptInputPath, encryptOutputPath);
-        expectPathToExist(encryptOutputPath);
-
-        const result = await decryptAsync(encryptionPassword, decryptInputPath, decryptOutputPath);
-        expectPathToExist(decryptOutputPath);
+        const result = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+        expectPathToExist(paths.decryptOutputPath);
         expect(result.error).toBeFalsy()
 
-        expectDirectoriesToBeEqual(encryptInputPath, decryptOutputPath);
+        expectDirectoriesToBeEqual(paths.encryptInputPath, paths.decryptOutputPath);
 
         // This raises an error where it cannot completely delete the temp directory...
         // It does not raise error after encryption but only raises after decryption
@@ -47,40 +42,35 @@ describe("Encryption Tests", () => {
 
     it("should give error message when decrypt with wrong password", async () => {
 
-        const tempDirectoryPath = path.join(tempParentDirectoryPath, "temp2");
+        const tempDirectoryPath = path.join(_tempParentDirectoryPath, "temp2");
+        const paths = new TestPaths(tempDirectoryPath);
         createEmptyDirectory(tempDirectoryPath);
 
-        const encryptInputPath = path.join(currentDirectoryPath, directoryToEncryptName);
-        const encryptOutputPath = path.join(tempDirectoryPath, encryptedFileName);
+        await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expectPathToExist(paths.encryptOutputPath);
 
-        const decryptInputPath = path.join(tempDirectoryPath, encryptedFileName);
-        const decryptOutputPath = path.join(tempDirectoryPath, directoryToEncryptName);
+        const wrongPassword = _encryptionPassword + "2";
+        const result = await decryptAsync(wrongPassword, paths.decryptInputPath, paths.decryptOutputPath);
 
-        await encryptAsync(encryptionPassword, encryptInputPath, encryptOutputPath);
-        expectPathToExist(encryptOutputPath);
-
-        const wrongPassword = encryptionPassword + "2";
-        const result = await decryptAsync(wrongPassword, decryptInputPath, decryptOutputPath);
-
-        expectPathToNotExist(decryptOutputPath);
+        expectPathToNotExist(paths.decryptOutputPath);
         expect(result.error).toBeTruthy();
         expect(result.error).toEqual("Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?");
     })
 })
 
 function expectTempDirectoryToBeClean() {
-    const tempDirectoryExists = fs.existsSync(tempParentDirectoryPath);
+    const tempDirectoryExists = fs.existsSync(_tempParentDirectoryPath);
     if (tempDirectoryExists) {
         try {
-            fs.rmSync(tempParentDirectoryPath, { recursive: true, force: true });
+            fs.rmSync(_tempParentDirectoryPath, { recursive: true, force: true });
         }
         catch (e) {
-            if (fs.existsSync(tempParentDirectoryPath))
-                fs.rmSync(tempParentDirectoryPath, { recursive: true, force: true });
+            if (fs.existsSync(_tempParentDirectoryPath))
+                fs.rmSync(_tempParentDirectoryPath, { recursive: true, force: true });
         }
     }
 
-    const isTempDirectoryCleanBeforeTest = fs.existsSync(tempParentDirectoryPath) === false;
+    const isTempDirectoryCleanBeforeTest = fs.existsSync(_tempParentDirectoryPath) === false;
     expect(isTempDirectoryCleanBeforeTest).toBeTruthy();
 }
 
@@ -112,5 +102,20 @@ function expectDirectoriesToBeEqual(path1: string, path2: string) {
 
         // Don't compare path as one is in a temp folder and one is not
         expect(fileBeforeEncrypt.name).toEqual(fileAfterDecrypt.name);
+    }
+}
+
+class TestPaths {
+    public encryptInputPath: string;
+    public encryptOutputPath: string;
+    public decryptInputPath: string;
+    public decryptOutputPath: string;
+
+    constructor(tempDirectoryPath: string) {
+        this.encryptInputPath = path.join(_currentDirectoryPath, _directoryToEncryptName);
+        this.encryptOutputPath = path.join(tempDirectoryPath, _encryptedFileName);
+
+        this.decryptInputPath = path.join(tempDirectoryPath, _encryptedFileName);
+        this.decryptOutputPath = path.join(tempDirectoryPath, _directoryToEncryptName);
     }
 }
