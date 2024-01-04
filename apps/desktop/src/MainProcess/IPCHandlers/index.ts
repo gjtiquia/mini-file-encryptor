@@ -1,0 +1,1 @@
+export { initHandles as initIPCMainHandles } from "./initHandles"

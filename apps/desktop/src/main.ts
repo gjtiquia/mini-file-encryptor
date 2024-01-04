@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-import { createWindow, initIPCHandlers } from './MainProcess';
+import { createWindow, initIPCMainHandles } from './MainProcess';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -8,7 +8,7 @@ if (require('electron-squirrel-startup')) {
 
 app.whenReady().then(() => {
 
-    initIPCHandlers();
+    initIPCMainHandles();
 
     createWindow(__dirname);
 
