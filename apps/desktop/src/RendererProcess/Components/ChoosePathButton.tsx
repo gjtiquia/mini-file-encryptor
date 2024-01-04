@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Tab } from "./TabBar";
+import { TabState } from "./TabBar";
 
 interface IChoosePathButtonProps {
     onPathChanged: (value: string) => void,
     path: string,
-    tab: Tab
+    tab: TabState
 }
 
 export const ChoosePathButton = (props: IChoosePathButtonProps) => {

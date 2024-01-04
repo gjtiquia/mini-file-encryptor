@@ -1,7 +1,7 @@
-export type Tab = "Encrypt" | "Decrypt";
+export type TabState = "Encrypt" | "Decrypt";
 
 interface ITabBarProps {
-    tab: Tab
+    tab: TabState
     onToggleTab: () => void
 }
 

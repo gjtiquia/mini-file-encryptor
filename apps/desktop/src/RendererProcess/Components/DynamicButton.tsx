@@ -1,7 +1,7 @@
-import { Tab } from "./TabBar"
+import { TabState } from "./TabBar"
 
 interface IDynamicButtonProps {
-    tab: Tab,
+    tab: TabState,
     password: string,
     path: string
 }
