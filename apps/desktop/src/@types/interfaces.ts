@@ -9,6 +9,7 @@ interface IDecryptParams {
 }
 
 interface IOpenDialogParams {
+    filters?: Electron.FileFilter[]
     properties?: Array<'openFile' | 'openDirectory' | 'multiSelections' | 'showHiddenFiles' | 'createDirectory' | 'promptToCreate' | 'noResolveAliases' | 'treatPackageAsDirectory' | 'dontAddToRecent'>
 }
 

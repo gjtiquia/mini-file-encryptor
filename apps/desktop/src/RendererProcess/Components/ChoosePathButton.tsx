@@ -13,9 +13,17 @@ export const ChoosePathButton = (props: IChoosePathButtonProps) => {
     const [isShowingName, setIsShowingName] = useState(true);
 
     async function onChoosePathClickedAsync() {
-        const { path, name } = await window.electronAPI.openDialogAsync({
-            properties: [props.tab === "Encrypt" ? "openDirectory" : "openFile"]
-        });
+        const params: IOpenDialogParams = {}
+
+        if (props.tab === "Encrypt") {
+            params.properties = ["openDirectory"]
+        }
+        else if (props.tab === "Decrypt") {
+            params.filters = [{ name: "Encrypted Files", extensions: ["encrypted"] }]
+            params.properties = ["openFile"]
+        }
+
+        const { path, name } = await window.electronAPI.openDialogAsync(params);
 
         props.onPathChanged(path);
         setName(name);
@@ -30,7 +38,7 @@ export const ChoosePathButton = (props: IChoosePathButtonProps) => {
 
     function getTextValue(): string {
         if (!hasPath())
-            return "No folder selected";
+            return props.tab === "Encrypt" ? "No folder selected" : "No file selected";
 
         return isShowingName ? name : props.path;
     }
@@ -41,7 +49,7 @@ export const ChoosePathButton = (props: IChoosePathButtonProps) => {
                 className="px-4 py-1 rounded-lg min-w-fit text-slate-200 bg-slate-600 hover:bg-slate-500 active:bg-slate-700 "
                 onClick={onChoosePathClickedAsync}
             >
-                Choose Folder
+                {props.tab === "Encrypt" ? "Choose Folder" : "Choose File"}
             </button>
 
             {!hasPath() ? null :
