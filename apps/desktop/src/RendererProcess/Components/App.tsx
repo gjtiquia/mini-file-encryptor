@@ -8,11 +8,15 @@ export const App = () => {
     const [directoryPath, setDirectoryPath] = useState("");
     const [password, setPassword] = useState("");
 
-    return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-5">
+    return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-12">
         <Header />
 
-        <ChooseFolderButton onPathChanged={setDirectoryPath} path={directoryPath} />
-        <PasswordInput onChanged={setPassword} value={password} />
+        <div className="flex flex-col items-center justify-center gap-5">
+            <ChooseFolderButton onPathChanged={setDirectoryPath} path={directoryPath} />
+            <PasswordInput onChanged={setPassword} value={password} />
+        </div>
+
+
         <EncryptButton password={password} inputPath={directoryPath} />
     </div>;
 }
