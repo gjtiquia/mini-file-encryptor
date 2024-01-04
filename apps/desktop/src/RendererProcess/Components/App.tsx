@@ -5,7 +5,6 @@ import { PasswordInput } from "./PasswordInput";
 import { TabBar, Tab } from "./TabBar";
 import { DynamicButton } from "./DynamicButton";
 
-
 export const App = () => {
     const [path, setPath] = useState("");
     const [password, setPassword] = useState("");
@@ -21,13 +20,15 @@ export const App = () => {
         }
     }
 
+    // TODO: Handling of wrong password
+
     return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-12">
         <Header />
 
         <TabBar tab={tab} onToggleTab={toggleTab} />
 
         <div className="flex flex-col items-center justify-center gap-5">
-            {/* TODO: Dragzone! Ref: https://www.youtube.com/watch?v=W73SFdpQN5I&ab_channel=tylerlaceby */}
+
 
             <ChoosePathButton tab={tab} onPathChanged={setPath} path={path} />
             <PasswordInput onChanged={setPassword} value={password} />
