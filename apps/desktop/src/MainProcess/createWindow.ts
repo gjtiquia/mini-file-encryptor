@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, Menu } from 'electron';
 import path from 'path';
 
 export const createWindow = (rootDirectory: string) => {
@@ -19,5 +19,7 @@ export const createWindow = (rootDirectory: string) => {
     }
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
+
+    mainWindow.setMenuBarVisibility(false);
 };
