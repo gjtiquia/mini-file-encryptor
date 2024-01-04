@@ -11,11 +11,11 @@ const encryptedFileName = `${directoryName}.${encryptionExtension}`;
 const currentDirectoryPath = __dirname;
 const tempDirectoryPath = path.join(currentDirectoryPath, "temp");
 
-const pathToEncrypt = path.join(currentDirectoryPath, directoryName);
-const encryptResultPath = path.join(tempDirectoryPath, encryptedFileName);
+const encryptInputPath = path.join(currentDirectoryPath, directoryName);
+const encryptOutputPath = path.join(tempDirectoryPath, encryptedFileName);
 
-const pathToDecrypt = path.join(tempDirectoryPath, encryptedFileName);
-const decryptResultPath = path.join(tempDirectoryPath, directoryName);
+const decryptInputPath = path.join(tempDirectoryPath, encryptedFileName);
+const decryptOutputPath = path.join(tempDirectoryPath, directoryName);
 
 describe("Encryption Tests", () => {
 
@@ -24,31 +24,18 @@ describe("Encryption Tests", () => {
         expectTempDirectoryToBeClean();
         createEmptyTestDirectory();
 
-        await encryptAsync(encryptionPassword, pathToEncrypt, encryptResultPath);
+        await encryptAsync(encryptionPassword, encryptInputPath, encryptOutputPath);
 
-        const encryptionExists = fs.existsSync(pathToEncrypt);
+        const encryptionExists = fs.existsSync(encryptInputPath);
         expect(encryptionExists).toBeTruthy();
 
-        await decryptAsync(encryptionPassword, pathToDecrypt, decryptResultPath);
+        await decryptAsync(encryptionPassword, decryptInputPath, decryptOutputPath);
 
-        const decryptionExists = fs.existsSync(decryptResultPath);
+        const decryptionExists = fs.existsSync(decryptOutputPath);
         expect(decryptionExists).toBeTruthy();
 
+        expectDirectoriesToBeEqual(encryptInputPath, decryptOutputPath);
 
-        // Note: this does not check the directory recursively. It only checks one level deep.
-        // Only Node 20+ supports the recursive flag in options.
-        const filesBeforeEncrypt = fs.readdirSync(pathToEncrypt, { withFileTypes: true });
-        const filesAfterDecrypt = fs.readdirSync(decryptResultPath, { withFileTypes: true });
-
-        expect(filesAfterDecrypt.length).toEqual(filesBeforeEncrypt.length);
-
-        for (let i = 0; i < filesBeforeEncrypt.length; i++) {
-            const fileBeforeEncrypt = filesBeforeEncrypt[i];
-            const fileAfterDecrypt = filesAfterDecrypt[i];
-
-            // Don't compare path as one is in a temp folder and one is not
-            expect(fileBeforeEncrypt.name).toEqual(fileAfterDecrypt.name);
-        }
 
         // This raises an error where it cannot completely delete the temp directory...
         // It does not raise error after encryption but only raises after decryption
@@ -76,4 +63,21 @@ function expectTempDirectoryToBeClean() {
 
 function createEmptyTestDirectory() {
     fs.mkdirSync(tempDirectoryPath);
+}
+
+function expectDirectoriesToBeEqual(path1: string, path2: string) {
+    // Note: this does not check the directory recursively. It only checks one level deep.
+    // Only Node 20+ supports the recursive flag in options.
+    const filesBeforeEncrypt = fs.readdirSync(path1, { withFileTypes: true });
+    const filesAfterDecrypt = fs.readdirSync(path2, { withFileTypes: true });
+
+    expect(filesAfterDecrypt.length).toEqual(filesBeforeEncrypt.length);
+
+    for (let i = 0; i < filesBeforeEncrypt.length; i++) {
+        const fileBeforeEncrypt = filesBeforeEncrypt[i];
+        const fileAfterDecrypt = filesAfterDecrypt[i];
+
+        // Don't compare path as one is in a temp folder and one is not
+        expect(fileBeforeEncrypt.name).toEqual(fileAfterDecrypt.name);
+    }
 }
