@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TabState } from "./TabBar"
 
 interface IDynamicButtonProps {
@@ -8,7 +9,12 @@ interface IDynamicButtonProps {
 
 export const DynamicButton = (props: IDynamicButtonProps) => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     function isEnabled() {
+        if (isLoading)
+            return false;
+
         const fieldsComplete = props.password && props.path;
         if (!fieldsComplete)
             return false;
@@ -21,11 +27,27 @@ export const DynamicButton = (props: IDynamicButtonProps) => {
     }
 
     async function onClickAsync() {
-        if (props.tab === "Encrypt")
-            await window.electronAPI.encryptAsync({ password: props.password, inputPath: props.path })
+        setIsLoading(true);
 
-        else if (props.tab === "Decrypt")
+        if (props.tab === "Encrypt") {
+            await window.electronAPI.encryptAsync({ password: props.password, inputPath: props.path })
+            // TODO : Error handling (eg. filename xxx already exists!)
+        }
+
+        else if (props.tab === "Decrypt") {
             await window.electronAPI.decryptAsync({ password: props.password, inputPath: props.path })
+            // TODO : Warning handling (eg. folder with name already exists! renamed decrypted folder to ...)
+            // TODO : Error handling
+        }
+
+        setIsLoading(false);
+    }
+
+    function getButtonText(): string {
+        if (isLoading)
+            return "Loading..."
+
+        return props.tab;
     }
 
     return <>
@@ -38,7 +60,7 @@ export const DynamicButton = (props: IDynamicButtonProps) => {
             disabled={!isEnabled()}
             onClick={onClickAsync}
         >
-            {props.tab}
+            {getButtonText()}
         </button>
     </>
 }
