@@ -24,5 +24,5 @@ Used the npm package `folder-encrypt` for encryption. Upon inspection of the sou
 
 ## References
 
-<https://github.com/scrwdrv/folder-encrypt>
-<https://nodejs.org/api/crypto.html>
+- <https://github.com/scrwdrv/folder-encrypt>
+- <https://nodejs.org/api/crypto.html>
