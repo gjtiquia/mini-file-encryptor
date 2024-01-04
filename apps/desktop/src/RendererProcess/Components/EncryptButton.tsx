@@ -14,19 +14,16 @@ export const EncryptButton = (props: IEncryptButtonProps) => {
     }
 
     return <>
-        {isEnabled() ?
-            <button
-                className="text-slate-200 bg-slate-600 hover:bg-slate-700 active:bg-slate-900 px-10 py-1 rounded-lg font-bold"
-                onClick={onClickAsync}
-            >
-                Encrypt
-            </button>
-            :
-            <button
-                className="text-slate-500 bg-slate-700 opacity-50 px-10 py-1 rounded-lg font-bold"
-            >
-                Encrypt
-            </button>
-        }
+        <button
+            className="
+                px-10 py-1 rounded-lg font-bold 
+                text-slate-200 bg-slate-600 hover:bg-slate-700 active:bg-slate-900 
+                disabled:text-slate-500 disabled:bg-slate-700 disabled:opacity-50
+            "
+            disabled={!isEnabled()}
+            onClick={onClickAsync}
+        >
+            Encrypt
+        </button>
     </>
 }
