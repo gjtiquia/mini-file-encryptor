@@ -9,7 +9,6 @@ if (require('electron-squirrel-startup')) {
 app.whenReady().then(() => {
 
     initIPCMainHandles();
-
     createWindow(__dirname);
 
     app.on('activate', () => {

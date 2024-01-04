@@ -9,7 +9,3 @@ export function initHandles() {
     ipcMain.handle(IPCRendererEvent.EncryptAsync, handleEncryptAsync)
     ipcMain.handle(IPCRendererEvent.DecryptAsync, handleDecryptAsync)
 }
-
-
-
-
