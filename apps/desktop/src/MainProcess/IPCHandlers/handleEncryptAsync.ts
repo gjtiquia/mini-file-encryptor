@@ -10,9 +10,10 @@ export async function handleEncryptAsync(e: IpcMainInvokeEvent, params: IEncrypt
     // await sleepAsync(1000);
 
     const outputPath = getEncryptOutputPath(params.inputPath);
-    await encryptAsync(params.password, params.inputPath, outputPath);
+    const result = await encryptAsync(params.password, params.inputPath, outputPath);
 
-    shell.showItemInFolder(outputPath);
+    if (!result.error && result.encryptedFilePath)
+        shell.showItemInFolder(result.encryptedFilePath);
 }
 
 function getEncryptOutputPath(inputPath: string) {

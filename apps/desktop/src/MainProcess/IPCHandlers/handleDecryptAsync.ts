@@ -13,8 +13,8 @@ export async function handleDecryptAsync(e: IpcMainInvokeEvent, params: IDecrypt
     const outputPath = getDecryptOutputPath(params.inputPath);
     const result = await decryptAsync(params.password, params.inputPath, outputPath);
 
-    if (!result.error)
-        shell.showItemInFolder(outputPath);
+    if (!result.error && result.decryptedDirectoryPath)
+        shell.showItemInFolder(result.decryptedDirectoryPath);
 
     return result;
 }

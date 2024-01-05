@@ -24,12 +24,17 @@ describe("Encryption Tests", () => {
         const paths = new TestPaths(tempDirectoryPath);
         createEmptyDirectory(tempDirectoryPath);
 
-        await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expectPathToExist(paths.encryptOutputPath);
+        const encryptResult = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
 
-        const result = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+        expectPathToExist(paths.encryptOutputPath);
+        expect(encryptResult.encryptedFilePath).toEqual(paths.encryptOutputPath);
+        expect(encryptResult.error).toBeFalsy()
+
+        const decryptResult = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+
         expectPathToExist(paths.decryptOutputPath);
-        expect(result.error).toBeFalsy()
+        expect(decryptResult.decryptedDirectoryPath).toEqual(paths.decryptOutputPath);
+        expect(decryptResult.error).toBeFalsy()
 
         expectDirectoriesToBeEqual(paths.encryptInputPath, paths.decryptOutputPath);
 
@@ -47,17 +52,17 @@ describe("Encryption Tests", () => {
         createEmptyDirectory(tempDirectoryPath);
 
         await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expectPathToExist(paths.encryptOutputPath);
 
         const wrongPassword = _encryptionPassword + "2";
         const result = await decryptAsync(wrongPassword, paths.decryptInputPath, paths.decryptOutputPath);
 
         expectPathToNotExist(paths.decryptOutputPath);
+        expect(result.decryptedDirectoryPath).toBeFalsy();
         expect(result.error).toBeTruthy();
         expect(result.error).toEqual("Unable to decrypt. Are you sure you are using the correct password?");
     })
 
-    // TODO : encryption output path already exists (append -1, -2, -3, -4...)
+    // TODO : encryption output path already exists (append -1, -2, -3, -4...) and return the actual path
     // TODO : decryption output path already exists (append -1, -2, -3, -4...)
 })
 
