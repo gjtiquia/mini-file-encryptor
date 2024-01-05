@@ -8,7 +8,7 @@ export async function encryptAsync(password: string, inputPath: string, outputPa
     })
 }
 
-interface IDecryptResult {
+export interface IDecryptResult {
     error?: string
 }
 
@@ -23,6 +23,11 @@ export async function decryptAsync(password: string, inputPath: string, outputPa
         return {}
     }
     catch (e) {
-        return { error: (e as Error).message }
+        let errorMessage = (e as Error).message;
+
+        if (errorMessage === "Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?")
+            errorMessage = "Unable to decrypt. Are you sure you are using the correct password?"
+
+        return { error: errorMessage }
     }
 }

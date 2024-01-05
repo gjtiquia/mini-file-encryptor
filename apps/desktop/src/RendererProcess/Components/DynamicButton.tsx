@@ -3,8 +3,8 @@ import { TabState } from "./TabBar"
 
 interface IDynamicButtonProps {
     tab: TabState,
-    password: string,
-    path: string
+    isEnabled: boolean,
+    onClickAsync: () => Promise<void>;
 }
 
 export const DynamicButton = (props: IDynamicButtonProps) => {
@@ -15,30 +15,13 @@ export const DynamicButton = (props: IDynamicButtonProps) => {
         if (isLoading)
             return false;
 
-        const fieldsComplete = props.password && props.path;
-        if (!fieldsComplete)
-            return false;
-
-        const extension = props.path.split(".").pop();
-        if (props.tab === "Decrypt" && extension !== "encrypted")
-            return false;
-
-        return true;
+        return props.isEnabled;
     }
 
     async function onClickAsync() {
         setIsLoading(true);
 
-        if (props.tab === "Encrypt") {
-            await window.electronAPI.encryptAsync({ password: props.password, inputPath: props.path })
-            // TODO : Error handling (eg. filename xxx already exists!)
-        }
-
-        else if (props.tab === "Decrypt") {
-            await window.electronAPI.decryptAsync({ password: props.password, inputPath: props.path })
-            // TODO : Warning handling (eg. folder with name already exists! renamed decrypted folder to ...)
-            // TODO : Error handling
-        }
+        await props.onClickAsync();
 
         setIsLoading(false);
     }

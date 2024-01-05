@@ -3,11 +3,12 @@
 
 import { contextBridge, ipcRenderer } from "electron";
 import { IPCRendererEvent } from "./@types/enums";
+import { IDecryptResult } from "core";
 
 export const ELECTRON_API = {
     openDialogAsync: (params: IOpenDialogParams): Promise<IOpenDialogResult> => ipcRenderer.invoke(IPCRendererEvent.OpenDialogAsync, params),
     encryptAsync: (params: IEncryptParams): Promise<void> => ipcRenderer.invoke(IPCRendererEvent.EncryptAsync, params),
-    decryptAsync: (params: IDecryptParams): Promise<void> => ipcRenderer.invoke(IPCRendererEvent.DecryptAsync, params),
+    decryptAsync: (params: IDecryptParams): Promise<IDecryptResult> => ipcRenderer.invoke(IPCRendererEvent.DecryptAsync, params),
 }
 
 contextBridge.exposeInMainWorld("electronAPI", ELECTRON_API)

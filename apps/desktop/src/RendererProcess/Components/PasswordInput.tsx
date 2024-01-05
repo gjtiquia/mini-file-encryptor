@@ -9,7 +9,7 @@ export const PasswordInput = (props: IPasswordInputProps) => {
         props.onChanged(passwordInput);
     }
 
-    return <div>
+    return <>
         <div className="flex w-max gap-3">
             <p className="text-slate-200">
                 Password:
@@ -21,8 +21,5 @@ export const PasswordInput = (props: IPasswordInputProps) => {
                 value={props.value}
             />
         </div>
-        {/* <span className="text-red-500">
-            Unable to decrypt. Are you sure you are using the correct password?
-        </span> */}
-    </div>
+    </>
 }

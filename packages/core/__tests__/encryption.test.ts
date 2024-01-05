@@ -54,8 +54,11 @@ describe("Encryption Tests", () => {
 
         expectPathToNotExist(paths.decryptOutputPath);
         expect(result.error).toBeTruthy();
-        expect(result.error).toEqual("Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?");
+        expect(result.error).toEqual("Unable to decrypt. Are you sure you are using the correct password?");
     })
+
+    // TODO : encryption output path already exists (append -1, -2, -3, -4...)
+    // TODO : decryption output path already exists (append -1, -2, -3, -4...)
 })
 
 function expectTempDirectoryToBeClean() {

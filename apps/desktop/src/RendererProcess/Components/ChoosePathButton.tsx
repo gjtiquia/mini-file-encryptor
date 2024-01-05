@@ -52,7 +52,7 @@ export const ChoosePathButton = (props: IChoosePathButtonProps) => {
                 {props.tab === "Encrypt" ? "Choose Folder" : "Choose File"}
             </button>
 
-            {!hasPath() ? null :
+            {hasPath() &&
                 <button
                     className="text-nowrap text-slate-500 hover:text-slate-400 active:text-slate-600"
                     onClick={() => setIsShowingName(!isShowingName)}
