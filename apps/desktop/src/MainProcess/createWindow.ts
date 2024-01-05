@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu } from 'electron';
+import { BrowserWindow } from 'electron';
 import path from 'path';
 
 export const createWindow = (rootDirectory: string) => {
