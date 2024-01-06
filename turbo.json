@@ -13,12 +13,14 @@
         },
         "package": {
             "dependsOn": [
-                "^build"
+                "^build",
+                "^test"
             ]
         },
         "make": {
             "dependsOn": [
-                "^build"
+                "^build",
+                "^test"
             ]
         }
     }

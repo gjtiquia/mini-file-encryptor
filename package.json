@@ -10,7 +10,7 @@
     "apps/*"
   ],
   "scripts": {
-    "start": "turbo run build && cd apps/desktop && npm start",
+    "start": "turbo run build && turbo run test && cd apps/desktop && npm start",
     "test": "turbo run test",
     "build": "turbo run build",
     "package": "turbo run package",
