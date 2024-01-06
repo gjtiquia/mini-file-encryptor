@@ -13,22 +13,23 @@ export function modifyPathIfExists(outputPath: string, extension?: string): stri
 
         const directoryPath = path.dirname(outputPath);
 
-        // "fileName.encypted", "fileName-1.encrypted"
-        // => "fileName", "fileName-1"
+        // "fileName.encypted", "fileName-copy-1.encrypted"
+        // => "fileName", "fileName-copy-1"
         const fileName = path.basename(outputPath, extension)
 
-        // "fileName", "fileName-1"
-        // => ["fileName"], ["fileName", "1"]
+        // "fileName", "fileName-copy-1"
+        // => ["fileName"], ["fileName", "copy", "1"]
         const hyphenSplitArray = fileName.split("-");
 
-        const hasIndex = hyphenSplitArray.length > 0 && !Number.isNaN(parseInt(hyphenSplitArray[hyphenSplitArray.length - 1] as string));
+        const hasIndex = hyphenSplitArray.length >= 3 && hyphenSplitArray[hyphenSplitArray.length - 2] === "copy" && !Number.isNaN(parseInt(hyphenSplitArray[hyphenSplitArray.length - 1] as string));
 
-        // ["fileName", "1"]
+        // ["fileName", "copy","1"]
         if (hasIndex) {
+            // ["fileName", "copy"] => popped "1"
             const index = parseInt(hyphenSplitArray.pop() as string);
             const newIndex = index + 1;
 
-            // ["fileName", "2]
+            // ["fileName", "copy", "2]
             hyphenSplitArray.push(newIndex.toString());
         }
 
@@ -40,12 +41,14 @@ export function modifyPathIfExists(outputPath: string, extension?: string): stri
             while (true) {
 
                 // Temporarily modify the array
+                hyphenSplitArray.push("copy")
                 hyphenSplitArray.push(targetIndex.toString());
 
                 const targetFileName = hyphenSplitArray.join("-") + extension;
                 const targetOutputPath = path.join(directoryPath, targetFileName);
 
                 // Return array to original state
+                hyphenSplitArray.pop();
                 hyphenSplitArray.pop();
 
                 if (!fs.existsSync(targetOutputPath))
@@ -55,6 +58,7 @@ export function modifyPathIfExists(outputPath: string, extension?: string): stri
             }
 
             // ["fileName", "1"] or ["fileName", "2"] ...
+            hyphenSplitArray.push("copy")
             hyphenSplitArray.push(targetIndex.toString());
         }
 

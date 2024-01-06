@@ -71,15 +71,15 @@ describe("Encryption Tests", () => {
         expectPathToExist(encryption_0.encryptedFilePath!);
 
         const encryption_1 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_1.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-1" + ".encrypted"));
+        expect(encryption_1.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-1" + ".encrypted"));
         expectPathToExist(encryption_1.encryptedFilePath!);
 
         const encryption_2 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_2.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-2" + ".encrypted"));
+        expect(encryption_2.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-2" + ".encrypted"));
         expectPathToExist(encryption_2.encryptedFilePath!);
 
         const encryption_3 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_3.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-3" + ".encrypted"));
+        expect(encryption_3.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-3" + ".encrypted"));
         expectPathToExist(encryption_3.encryptedFilePath!);
     })
 
@@ -89,8 +89,8 @@ describe("Encryption Tests", () => {
         const paths = new TestPaths(tempDirectoryPath);
         createEmptyDirectory(tempDirectoryPath);
 
-        const encryption_2 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.customEncryptOutputPath(`${_directoryToEncryptName}-2`));
-        expect(encryption_2.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-2" + ".encrypted"));
+        const encryption_2 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.customEncryptOutputPath(`${_directoryToEncryptName}-copy-2`));
+        expect(encryption_2.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-2" + ".encrypted"));
         expectPathToExist(encryption_2.encryptedFilePath!);
 
         // starts from index 0
@@ -99,16 +99,16 @@ describe("Encryption Tests", () => {
         expectPathToExist(encryption_0.encryptedFilePath!);
 
         const encryption_1 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_1.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-1" + ".encrypted"));
+        expect(encryption_1.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-1" + ".encrypted"));
         expectPathToExist(encryption_1.encryptedFilePath!);
 
         // Should see that -2 exists and automatically goes to -3
         const encryption_3 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_3.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-3" + ".encrypted"));
+        expect(encryption_3.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-3" + ".encrypted"));
         expectPathToExist(encryption_3.encryptedFilePath!);
 
         const encryption_4 = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
-        expect(encryption_4.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-4" + ".encrypted"));
+        expect(encryption_4.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-4" + ".encrypted"));
         expectPathToExist(encryption_3.encryptedFilePath!);
     })
 
@@ -125,11 +125,11 @@ describe("Encryption Tests", () => {
         expectPathToExist(decryption_0.decryptedDirectoryPath!);
 
         const decryption_1 = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
-        expect(decryption_1.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-1"));
+        expect(decryption_1.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-1"));
         expectPathToExist(decryption_1.decryptedDirectoryPath!);
 
         const decryption_2 = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
-        expect(decryption_2.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-2"));
+        expect(decryption_2.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-copy-2"));
         expectPathToExist(decryption_2.decryptedDirectoryPath!);
     })
 })
