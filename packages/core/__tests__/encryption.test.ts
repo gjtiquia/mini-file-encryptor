@@ -62,7 +62,29 @@ describe("Encryption Tests", () => {
         expect(result.error).toEqual("Unable to decrypt. Are you sure you are using the correct password?");
     })
 
-    // TODO : encryption output path already exists (append -1, -2, -3, -4...) and return the actual path
+    it("should append to path if encryption output path exists", async () => {
+
+        const tempDirectoryPath = path.join(_tempParentDirectoryPath, "temp3");
+        const paths = new TestPaths(tempDirectoryPath);
+        createEmptyDirectory(tempDirectoryPath);
+
+        const firstEncryption = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expect(firstEncryption.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + ".encrypted"));
+        expectPathToExist(firstEncryption.encryptedFilePath!);
+
+        const secondEncryption = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expect(secondEncryption.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-1" + ".encrypted"));
+        expectPathToExist(secondEncryption.encryptedFilePath!);
+
+        const thirdEncryption = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expect(thirdEncryption.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-2" + ".encrypted"));
+        expectPathToExist(thirdEncryption.encryptedFilePath!);
+
+        const fourthEncryption = await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+        expect(fourthEncryption.encryptedFilePath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-3" + ".encrypted"));
+        expectPathToExist(fourthEncryption.encryptedFilePath!);
+    })
+
     // TODO : decryption output path already exists (append -1, -2, -3, -4...)
 })
 

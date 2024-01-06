@@ -10,7 +10,7 @@
     "apps/*"
   ],
   "scripts": {
-    "start": "cd apps/desktop && npm start",
+    "start": "turbo run start --force",
     "test": "turbo run test",
     "build": "turbo run build"
   },
