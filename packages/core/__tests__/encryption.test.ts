@@ -85,6 +85,8 @@ describe("Encryption Tests", () => {
         expectPathToExist(fourthEncryption.encryptedFilePath!);
     })
 
+    // TODO : edge case if only "output-5.encrypted" exists? probably still "output.encrypted"? then increase again until it should skip 5?
+
     // TODO : decryption output path already exists (append -1, -2, -3, -4...)
 })
 
