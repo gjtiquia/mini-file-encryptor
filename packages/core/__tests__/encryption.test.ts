@@ -60,7 +60,7 @@ describe("Encryption Tests", () => {
         expect(result.error).toEqual("Unable to decrypt. Are you sure you are using the correct password?");
     })
 
-    it("should append to path if encryption output path exists", async () => {
+    it("should append increasing index to path if encryption output path exists", async () => {
 
         const tempDirectoryPath = path.join(_tempParentDirectoryPath, "temp3");
         const paths = new TestPaths(tempDirectoryPath);
@@ -112,7 +112,26 @@ describe("Encryption Tests", () => {
         expectPathToExist(encryption_3.encryptedFilePath!);
     })
 
-    // TODO : decryption output path already exists (append -1, -2, -3, -4...)
+    it("should append increasing index to path if decryption output path exists", async () => {
+
+        const tempDirectoryPath = path.join(_tempParentDirectoryPath, "temp5");
+        const paths = new TestPaths(tempDirectoryPath);
+        createEmptyDirectory(tempDirectoryPath);
+
+        await encryptAsync(_encryptionPassword, paths.encryptInputPath, paths.encryptOutputPath);
+
+        const decryption_0 = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+        expect(decryption_0.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName));
+        expectPathToExist(decryption_0.decryptedDirectoryPath!);
+
+        const decryption_1 = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+        expect(decryption_1.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-1"));
+        expectPathToExist(decryption_1.decryptedDirectoryPath!);
+
+        const decryption_2 = await decryptAsync(_encryptionPassword, paths.decryptInputPath, paths.decryptOutputPath);
+        expect(decryption_2.decryptedDirectoryPath).toEqual(path.join(tempDirectoryPath, _directoryToEncryptName + "-2"));
+        expectPathToExist(decryption_2.decryptedDirectoryPath!);
+    })
 })
 
 function expectTempDirectoryToBeClean() {

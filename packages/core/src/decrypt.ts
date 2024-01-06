@@ -1,6 +1,5 @@
-import fs from "fs";
-import path from "path";
 import * as folderEncrypt from "folder-encrypt";
+import { modifyPathIfExists } from "./util";
 
 export interface IDecryptResult {
     decryptedDirectoryPath?: string,
@@ -8,19 +7,21 @@ export interface IDecryptResult {
 }
 
 export async function decryptAsync(password: string, inputPath: string, outputPath: string): Promise<IDecryptResult> {
+
+    let actualOutputPath = modifyPathIfExists(outputPath);
+
     try {
-
-        // TODO : Checking if output path already exists
-
         await folderEncrypt.decrypt({
             password: password,
             input: inputPath,
-            output: outputPath
+            output: actualOutputPath
         })
 
-        return { decryptedDirectoryPath: outputPath }
+        return { decryptedDirectoryPath: actualOutputPath }
     }
     catch (e) {
+        console.error(e);
+
         let errorMessage = (e as Error).message;
 
         if (errorMessage === "Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?")
