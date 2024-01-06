@@ -4,6 +4,9 @@ import { IDecryptResult, decryptAsync } from "core";
 import { sleepAsync } from '../../utils/sleep';
 
 export async function handleDecryptAsync(e: IpcMainInvokeEvent, params: IDecryptParams): Promise<IDecryptResult> {
+    if (!params.password || !params.inputPath)
+        return { error: `Invalid password and/or input path!` };
+
     if (!hasCorrectExtension(params.inputPath))
         return { error: `Input path ${params.inputPath} does not have the extension '.encrypted'!` };
 

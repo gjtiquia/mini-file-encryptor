@@ -20,12 +20,16 @@ export async function decryptAsync(password: string, inputPath: string, outputPa
         return { decryptedDirectoryPath: actualOutputPath }
     }
     catch (e) {
-        console.error(e);
 
         let errorMessage = (e as Error).message;
 
-        if (errorMessage === "Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?")
+        if (errorMessage === "Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?") {
             errorMessage = "Unable to decrypt. Are you sure you are using the correct password?"
+        }
+        else {
+            // Unexpected error, should definitely console log it
+            console.error(e);
+        }
 
         return { error: errorMessage }
     }

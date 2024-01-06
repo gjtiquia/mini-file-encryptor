@@ -1,10 +1,10 @@
 import { IpcMainInvokeEvent, shell } from 'electron';
-import { encryptAsync } from "core";
+import { IEncryptResult, encryptAsync } from "core";
 import { sleepAsync } from '../../utils/sleep';
 
-export async function handleEncryptAsync(e: IpcMainInvokeEvent, params: IEncryptParams) {
+export async function handleEncryptAsync(e: IpcMainInvokeEvent, params: IEncryptParams): Promise<IEncryptResult> {
     if (!params.password || !params.inputPath)
-        return;
+        return { error: `Invalid password and/or input path!` };
 
     // Mock takes time to encrypt
     // await sleepAsync(1000);
@@ -14,6 +14,8 @@ export async function handleEncryptAsync(e: IpcMainInvokeEvent, params: IEncrypt
 
     if (!result.error && result.encryptedFilePath)
         shell.showItemInFolder(result.encryptedFilePath);
+
+    return result;
 }
 
 function getEncryptOutputPath(inputPath: string) {

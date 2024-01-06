@@ -13,15 +13,32 @@ export const App = () => {
     const [isShowingError, setIsShowingError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const [isShowingSuccess, setIsShowingSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+
     function toggleTab() {
         setPath("");
         setPassword("");
         hideError();
+        hideSuccess();
 
         switch (tab) {
             case "Encrypt": setTab("Decrypt"); return;
             case "Decrypt": setTab("Encrypt"); return;
         }
+    }
+
+    function onPathChanged(value: string) {
+        hideError();
+        hideSuccess();
+
+        setPath(value);
+    }
+
+    function onPasswordChanged(value: string) {
+        hideSuccess();
+
+        setPassword(value);
     }
 
     function showError(message: string) {
@@ -33,11 +50,26 @@ export const App = () => {
         setIsShowingError(false);
     }
 
+    function showSuccess(message: string) {
+        setSuccessMessage(message);
+        setIsShowingSuccess(true);
+    }
+
+    function hideSuccess() {
+        setIsShowingSuccess(false);
+    }
+
     async function OnButtonClickAsync() {
         hideError();
+        hideSuccess();
 
         if (tab === "Encrypt") {
-            await window.electronAPI.encryptAsync({ password: password, inputPath: path })
+            const result = await window.electronAPI.encryptAsync({ password: password, inputPath: path })
+
+            if (result.error)
+                showError(result.error)
+            else
+                showSuccess(`Successfully encrypted to '${result.encryptedFilePath}'`);
         }
 
         else if (tab === "Decrypt") {
@@ -45,6 +77,8 @@ export const App = () => {
 
             if (result.error)
                 showError(result.error)
+            else
+                showSuccess(`Successfully decrypted to '${result.decryptedDirectoryPath}'`);
         }
     }
 
@@ -66,12 +100,18 @@ export const App = () => {
         <TabBar tab={tab} onToggleTab={toggleTab} />
 
         <div className="flex flex-col items-center justify-center gap-5">
-            <ChoosePathButton tab={tab} onPathChanged={setPath} path={path} />
-            <PasswordInput onChanged={setPassword} value={password} />
+            <ChoosePathButton tab={tab} onPathChanged={onPathChanged} path={path} />
+            <PasswordInput onChanged={onPasswordChanged} value={password} />
 
             {isShowingError &&
                 <span className="text-red-500 text-center">
                     {errorMessage}
+                </span>
+            }
+
+            {isShowingSuccess &&
+                <span className="text-green-500 text-center">
+                    {successMessage}
                 </span>
             }
         </div>
