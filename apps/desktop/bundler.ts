@@ -32,19 +32,8 @@ const resolveLink = (node: Node): Node => {
 
 const getWorkspaceByPath = (node: Node, realPath: string): Node | undefined => {
     return [...node.edgesOut.values()]
-        .filter((depEdge) => {
-            console.log(`filtering... ${depEdge.workspace === true}`);
-            console.log(depEdge);
-
-
-            return depEdge.workspace;
-        })
-        .map((depEdge) => {
-            console.log("mapping...");
-            console.log(depEdge);
-
-            return resolveLink(depEdge.to)
-        })
+        .filter((depEdge) => depEdge.workspace)
+        .map((depEdge) => resolveLink(depEdge.to))
         .find((depNode) => depNode.realpath === realPath);
 }
 
