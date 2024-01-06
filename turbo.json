@@ -10,6 +10,16 @@
             "dependsOn": [
                 "build"
             ]
+        },
+        "package": {
+            "dependsOn": [
+                "^build"
+            ]
+        },
+        "make": {
+            "dependsOn": [
+                "^build"
+            ]
         }
     }
 }

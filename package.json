@@ -12,7 +12,9 @@
   "scripts": {
     "start": "turbo run build && cd apps/desktop && npm start",
     "test": "turbo run test",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "package": "turbo run package",
+    "make": "turbo run make"
   },
   "dependencies": {
     "turbo": "^1.10.16"
