@@ -1,9 +1,9 @@
-name: Build Desktop App
+name: Package Desktop App
 
 on: workflow_dispatch
 
 jobs:
-  build-windows-app:
+  package-windows-app:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
@@ -26,8 +26,14 @@ jobs:
     - name: Package Windows App
       run: npm run package
 
+    - name: Archive Package Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: windows-package
+        path: apps/desktop/out
 
-  build-mac-app:
+
+  package-mac-app:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
@@ -47,5 +53,11 @@ jobs:
     - name: Install Dependencies
       run: npm install
     
-    - name: Package Windows App
+    - name: Package MacOS App
       run: npm run package
+
+    - name: Archive Package Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: macos-package
+        path: apps/desktop/out
