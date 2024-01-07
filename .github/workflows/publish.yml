@@ -1,0 +1,63 @@
+name: Publish Desktop App
+
+on: workflow_dispatch
+
+jobs:
+  publish-windows-app:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+
+    - name: Check Node Version
+      run: node -v
+
+    - name: See Directory
+      run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Publish Windows App
+      run: npm run publish
+
+    - name: Archive Publish Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: windows-publish
+        path: apps/desktop/out
+
+
+  publish-mac-app:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+        
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+
+    - name: Check Node Version
+      run: node -v
+
+    - name: See Directory
+      run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Publish MacOS App
+      run: npm run publish
+
+    - name: Archive Publish Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: macos-publish
+        path: apps/desktop/out
