@@ -1,5 +1,7 @@
 name: Build Desktop App
+
 on: workflow_dispatch
+
 jobs:
   build-windows-app:
     runs-on: windows-latest
@@ -7,13 +9,23 @@ jobs:
     - uses: actions/checkout@master
       with:
         ref: main
+
     - uses: actions/setup-node@master
       with:
         node-version: "20"
-    - name: check node version
+
+    - name: Check Node Version
       run: node -v
-    - name: see directory
+
+    - name: See Directory
       run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Package Windows App
+      run: npm run package
+
 
   build-mac-app:
     runs-on: macos-latest
@@ -21,10 +33,19 @@ jobs:
     - uses: actions/checkout@master
       with:
         ref: main
+        
     - uses: actions/setup-node@master
       with:
         node-version: "20"
-    - name: check node version
+
+    - name: Check Node Version
       run: node -v
-    - name: see directory
+
+    - name: See Directory
       run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Package Windows App
+      run: npm run package
