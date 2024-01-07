@@ -9,12 +9,12 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "publish:dryrun": "electron-forge publish --dry-run",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
   "author": {
-    "name": "GJ Tiquia",
-    "email": "gershom.tiquia@gmail.com"
+    "name": "GJ Tiquia"
   },
   "license": "MIT",
   "dependencies": {
@@ -24,8 +24,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@manypkg/find-root": "^2.2.1",
-    "@npmcli/arborist": "^7.2.2",
     "@electron-forge/cli": "^7.2.0",
     "@electron-forge/maker-deb": "^7.2.0",
     "@electron-forge/maker-rpm": "^7.2.0",
@@ -33,6 +31,9 @@
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
     "@electron-forge/plugin-vite": "^7.2.0",
+    "@electron-forge/publisher-github": "^7.2.0",
+    "@manypkg/find-root": "^2.2.1",
+    "@npmcli/arborist": "^7.2.2",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",

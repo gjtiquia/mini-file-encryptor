@@ -14,7 +14,9 @@
     "test": "turbo run test",
     "build": "turbo run build",
     "package": "turbo run build && turbo run test && turbo run package",
-    "make": "turbo run build && turbo run test && turbo run make"
+    "make": "turbo run build && turbo run test && turbo run make",
+    "publish": "turbo run build && turbo run test && turbo run publish",
+    "publish:dryrun": "turbo run build && turbo run test && turbo run publish:dryrun"
   },
   "dependencies": {
     "turbo": "^1.10.16"

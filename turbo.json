@@ -16,6 +16,12 @@
         },
         "make": {
             "cache": false
+        },
+        "publish": {
+            "cache": false
+        },
+        "publish:dryrun": {
+            "cache": false
         }
     }
 }
