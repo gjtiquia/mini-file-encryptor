@@ -13,8 +13,8 @@
     "start": "turbo run build && turbo run test && cd apps/desktop && npm start",
     "test": "turbo run test",
     "build": "turbo run build",
-    "package": "turbo run package",
-    "make": "turbo run make"
+    "package": "turbo run build && turbo run test && turbo run package",
+    "make": "turbo run build && turbo run test && turbo run make"
   },
   "dependencies": {
     "turbo": "^1.10.16"

@@ -8,6 +8,7 @@ import { bundle } from './bundler';
 
 const config: ForgeConfig = {
   packagerConfig: {
+    icon: 'images/icon',
     prune: false, // required for the workaround below to work
   },
   hooks: {
