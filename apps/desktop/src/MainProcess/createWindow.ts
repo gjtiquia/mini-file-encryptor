@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, Menu } from 'electron';
 import path from 'path';
 
 export const createWindow = (rootDirectory: string) => {
@@ -21,5 +21,10 @@ export const createWindow = (rootDirectory: string) => {
     // Open the DevTools.
     // mainWindow.webContents.openDevTools();
 
+    // Hides the top menu bar for Windows
+    // Apparently does not affect MacOS
     mainWindow.setMenuBarVisibility(false);
+
+    // Sets null menu bar for MacOS
+    Menu.setApplicationMenu(null);
 };
