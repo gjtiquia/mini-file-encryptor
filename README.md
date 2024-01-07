@@ -16,6 +16,18 @@ Having a minimalistic design, Mini File Encryptor is easy to use with no configu
 
 [Download for MacOS](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.0/MiniFileEncryptor-darwin-x64-1.0.0.zip)
 
+## Troubleshooting - MacOS
+
+![MacOS - Developer cannot be verified warning](images/macos-cannotverify.png)
+
+If the following warning is shown,
+
+> "MiniFileEncryptor" cannot be opened because the developer cannot be verified.
+
+Go to __System Settings > Privacy & Security__, scroll to the bottom and click __Open Anyway__.
+
+![MacOS - Open Anyway](images/macos-openanyway.png)
+
 ## Commands
 
 Run the following command to install all dependencies.
