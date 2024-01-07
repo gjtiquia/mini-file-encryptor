@@ -16,6 +16,18 @@ Having a minimalistic design, Mini File Encryptor is easy to use with no configu
 
 [Download for MacOS](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.0/MiniFileEncryptor-darwin-x64-1.0.0.zip)
 
+## Troubleshooting - Windows
+
+![Windows - Windows protected your PC warning](images/windows-unrecognizedapp.png)
+
+If the following warning is shown,
+
+> Windows protected your PC
+
+Click __More info__, then click __Run anyway__ at the bottom.
+
+![Windows - Run Anyway](images/windows-runanyway.png)
+
 ## Troubleshooting - MacOS
 
 ![MacOS - Developer cannot be verified warning](images/macos-cannotverify.png)
