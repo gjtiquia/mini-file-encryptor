@@ -1,0 +1,63 @@
+name: Make Desktop App
+
+on: workflow_dispatch
+
+jobs:
+  make-windows-app:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+
+    - name: Check Node Version
+      run: node -v
+
+    - name: See Directory
+      run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Make Windows App
+      run: npm run make
+
+    - name: Archive Make Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: windows-make
+        path: apps/desktop/out
+
+
+  make-mac-app:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+        
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+
+    - name: Check Node Version
+      run: node -v
+
+    - name: See Directory
+      run: ls
+
+    - name: Install Dependencies
+      run: npm install
+    
+    - name: Make MacOS App
+      run: npm run make
+
+    - name: Archive Make Artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: macos-make
+        path: apps/desktop/out
