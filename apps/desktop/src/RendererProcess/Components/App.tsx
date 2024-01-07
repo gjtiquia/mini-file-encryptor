@@ -4,6 +4,9 @@ import { ChoosePathButton } from "./ChoosePathButton";
 import { PasswordInput } from "./PasswordInput";
 import { TabBar, TabState } from "./TabBar";
 import { DynamicButton } from "./DynamicButton";
+import { ErrorMessage } from "./ErrorMessage";
+import { SuccessMessage } from "./SuccessMessage";
+import { version } from "../../../package.json"
 
 export const App = () => {
     const [path, setPath] = useState("");
@@ -94,28 +97,27 @@ export const App = () => {
         return true;
     }
 
-    return <div className="bg-slate-800 h-full p-3 flex flex-col items-center justify-center gap-12">
-        <Header />
+    return <div className="bg-slate-800 p-1.5 h-full flex flex-col">
+        <div className="flex-grow flex flex-col items-center justify-center gap-12">
+            <Header />
 
-        <TabBar tab={tab} onToggleTab={toggleTab} />
+            <TabBar tab={tab} onToggleTab={toggleTab} />
 
-        <div className="flex flex-col items-center justify-center gap-5">
-            <ChoosePathButton tab={tab} onPathChanged={onPathChanged} path={path} />
-            <PasswordInput onChanged={onPasswordChanged} value={password} />
+            <div className="flex flex-col items-center justify-center gap-5">
+                <ChoosePathButton tab={tab} onPathChanged={onPathChanged} path={path} />
+                <PasswordInput onChanged={onPasswordChanged} value={password} />
+            </div>
 
-            {isShowingError &&
-                <span className="text-red-500 text-center">
-                    {errorMessage}
-                </span>
-            }
+            <div className="flex flex-col items-center justify-center gap-2">
+                <DynamicButton tab={tab} isEnabled={isButtonEnabled()} onClickAsync={OnButtonClickAsync} />
 
-            {isShowingSuccess &&
-                <span className="text-green-500 text-center">
-                    {successMessage}
-                </span>
-            }
-        </div>
+                <ErrorMessage isShowingError={isShowingError} errorMessage={errorMessage} />
+                <SuccessMessage isShowingSuccess={isShowingSuccess} successMessage={successMessage} />
+            </div>
+        </div >
 
-        <DynamicButton tab={tab} isEnabled={isButtonEnabled()} onClickAsync={OnButtonClickAsync} />
-    </div>;
+        <p className="self-end text-slate-600">
+            v{version}
+        </p>
+    </div>
 }
