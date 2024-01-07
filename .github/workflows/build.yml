@@ -1,0 +1,30 @@
+name: Build Desktop App
+on: workflow_dispatch
+jobs:
+  build-windows-app:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+    - name: check node version
+      run: node -v
+    - name: see directory
+      run: ls
+
+  build-mac-app:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: main
+    - uses: actions/setup-node@master
+      with:
+        node-version: "20"
+    - name: check node version
+      run: node -v
+    - name: see directory
+      run: ls
