@@ -1,7 +1,7 @@
 {
   "name": "desktop",
   "productName": "MiniFileEncryptor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mini File Encryptor. A minimalistic offline file encryptor.",
   "main": ".vite/build/main.js",
   "scripts": {
