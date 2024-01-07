@@ -26,13 +26,22 @@ const config: ForgeConfig = {
     },
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
-  publishers: [new PublisherGithub({
-    repository: {
-      name: "mini-file-encryptor",
-      owner: "gjtiquia"
-    }
-  })],
+  makers: [
+    new MakerSquirrel({
+      // For the .nupkg name, or else it will default to name field of package.json (which is 'desktop')
+      name: "MiniFileEncryptor"
+    }),
+    new MakerZIP({}, ['darwin']),
+    new MakerRpm({}),
+    new MakerDeb({})],
+  publishers: [
+    new PublisherGithub({
+      repository: {
+        name: "mini-file-encryptor",
+        owner: "gjtiquia"
+      }
+    })
+  ],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
