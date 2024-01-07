@@ -1,6 +1,12 @@
 name: Make Desktop App
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '**.md'
 
 jobs:
   make-windows-app:
