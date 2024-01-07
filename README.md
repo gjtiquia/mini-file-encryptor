@@ -12,9 +12,9 @@ Having a minimalistic design, Mini File Encryptor is easy to use with no configu
 
 ## Download Links
 
-[Download for Windows](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.0/MiniFileEncryptor-1.0.0-Setup.exe)
+[Download for Windows](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.1/MiniFileEncryptor-1.0.1-Setup.exe)
 
-[Download for MacOS](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.0/MiniFileEncryptor-darwin-x64-1.0.0.zip)
+[Download for MacOS](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.1/MiniFileEncryptor-darwin-x64-1.0.1.zip)
 
 ## Troubleshooting - Windows
 
