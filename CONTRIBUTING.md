@@ -57,6 +57,11 @@ Run the following command to install a package in a specific workspace.
 npm install <package> --workspace=<workspace>
 ```
 
-## References
+## Monorepo References
 
 - <https://turbo.build/repo/docs/handbook>
+
+## GitHub Actions References
+
+- <https://docs.github.com/en/actions/learn-github-actions/variables>
+- <https://docs.github.com/en/actions/security-guides/automatic-token-authentication>
