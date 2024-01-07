@@ -43,6 +43,7 @@ npm run make
 ```
 
 Run the following command to package the app into an executable, make a distributable and publish to GitHub Releases.
+> Note that `GITHUB_TOKEN` is required to be set in the environment before running this command. It is set in GitHub Actions by default.
 
 ```bash
 npm run publish
