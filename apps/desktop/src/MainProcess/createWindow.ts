@@ -26,5 +26,6 @@ export const createWindow = (rootDirectory: string) => {
     mainWindow.setMenuBarVisibility(false);
 
     // Sets null menu bar for MacOS
-    Menu.setApplicationMenu(null);
+    // Menu.setApplicationMenu(null); // Does not work
+    Menu.setApplicationMenu(Menu.buildFromTemplate([]));
 };

@@ -14,7 +14,16 @@ Having a minimalistic design, Mini File Encryptor is easy to use with no configu
 
 [Download for Windows](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.1/MiniFileEncryptor-1.0.1-Setup.exe)
 
+Windows Download Instructions
+
+1. Run the `.exe` file to install the app.
+
 [Download for MacOS](https://github.com/gjtiquia/mini-file-encryptor/releases/download/v1.0.1/MiniFileEncryptor-darwin-x64-1.0.1.zip)
+
+MacOS Download Instructions
+
+1. Unzip the `.zip` file.
+2. Drag the `.app` file into the `/Applications` folder.
 
 ## Troubleshooting - Windows
 

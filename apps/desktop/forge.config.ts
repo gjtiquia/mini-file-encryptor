@@ -29,7 +29,11 @@ const config: ForgeConfig = {
   makers: [
     new MakerSquirrel({
       // For the .nupkg name, or else it will default to name field of package.json (which is 'desktop')
-      name: "MiniFileEncryptor"
+      name: "MiniFileEncryptor",
+
+      // Or else in the Start menu, the app will be under the folder "GJ Tiquia".
+      authors: "Mini File Encryptor", // Does not actually work but leave it
+      owners: "Mini File Encryptor"
     }),
     new MakerZIP({}, ['darwin']),
     new MakerRpm({}),
