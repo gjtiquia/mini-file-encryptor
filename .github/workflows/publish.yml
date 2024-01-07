@@ -5,9 +5,11 @@ on: workflow_dispatch
 jobs:
   publish-windows-app:
     runs-on: windows-latest
+    permissions:
+      contents: write
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    
     steps:
     - uses: actions/checkout@master
       with:
@@ -38,6 +40,8 @@ jobs:
 
   publish-mac-app:
     runs-on: macos-latest
+    permissions:
+      contents: write
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
