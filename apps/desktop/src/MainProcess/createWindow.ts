@@ -25,7 +25,29 @@ export const createWindow = (rootDirectory: string) => {
     // Apparently does not affect MacOS
     mainWindow.setMenuBarVisibility(false);
 
-    // Sets null menu bar for MacOS
-    // Menu.setApplicationMenu(null); // Does not work
-    Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+    // Custom menu bar for MacOS since cannot hide
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
+
+        // https://www.electronjs.org/docs/latest/api/menu#examples
+        { role: "appMenu" },
+        {
+            label: 'View',
+            submenu: [
+                // { role: 'reload' },
+                // { role: 'forceReload' },
+                // { role: 'toggleDevTools' },
+                // { type: 'separator' },
+                // { role: 'resetZoom' },
+                // { role: 'zoomIn' },
+                // { role: 'zoomOut' },
+                // { type: 'separator' },
+                { role: 'togglefullscreen' }
+            ]
+        },
+
+        // https://www.electronjs.org/docs/latest/api/menu#standard-menus
+        { role: "window" },
+        { role: "help" },
+        // { role: "services" } // appMenu should already have services
+    ]));
 };
