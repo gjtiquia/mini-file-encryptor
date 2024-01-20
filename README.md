@@ -24,7 +24,7 @@ MacOS Download Instructions
 
 1. Unzip the `.zip` file.
 2. Drag the `.app` file into the `/Applications` folder.
- 
+
 ## Troubleshooting - Windows
 
 ![Windows - Windows protected your PC warning](images/windows-unrecognizedapp.png)
